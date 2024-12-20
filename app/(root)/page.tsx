@@ -1,6 +1,9 @@
 import SearchForm from "@/components/SearchForm";
 import StartupCard from "@/components/StartupCard";
+import { client } from "@/sanity/lib/client";
+import { STARTUPS_QUERY } from "@/sanity/lib/queries";
 import { Star } from "lucide-react";
+import { ST } from "next/dist/shared/lib/utils";
 import { title } from "process";
 
 export default async function Home({ searchParams}: {
@@ -8,18 +11,8 @@ export default async function Home({ searchParams}: {
 }) {
   const query = (await searchParams).query
 
-  const posts = [
-    {
-      _createdAt: new Date(),
-      views: '55',
-      author: {_id: 1, name: 'Joseph Nguyen'},
-      _id: 1,
-      description: 'This is a description',
-      category: 'Robot',
-      image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2iulfhJqTISVs2AKs5pO-o6xPMduCmWZTMw&s',
-      title: 'Wild Robot'
-    }
-  ]
+  const posts = await client.fetch(STARTUPS_QUERY)
+  
   return (
     <>
       <section className="lavender_container">
