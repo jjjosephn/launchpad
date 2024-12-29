@@ -35,3 +35,9 @@ export const STARTUP_BY_ID_QUERY =
       category,
       image,
    }`)
+
+export const STARTUP_VIEWS_QUERY =
+   defineQuery(`*[_type == 'startups' && _id == $id][0]{
+      _id,
+      views
+   }`)

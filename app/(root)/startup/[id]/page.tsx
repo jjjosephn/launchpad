@@ -6,6 +6,7 @@ import { notFound } from 'next/navigation'
 import React, { Suspense } from 'react'
 import markdownit from 'markdown-it'
 import { Skeleton } from '@/components/ui/skeleton'
+import View from '@/components/View'
 
 const md = markdownit()
 
@@ -66,7 +67,7 @@ const page = async ({ params }: { params: Promise<{ id: string }>}) => {
             <hr className='divider' />
 
             <Suspense fallback={<Skeleton className='view-skeleton'/>}>
-               
+               <View id={id}/>
             </Suspense>
          </section>
       </>
