@@ -3,12 +3,18 @@ import { STARTUP_BY_ID_QUERY } from '@/sanity/lib/queries'
 import Link from 'next/link'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
-import React from 'react'
+import React, { Suspense } from 'react'
+import markdownit from 'markdown-it'
+import { Skeleton } from '@/components/ui/skeleton'
+
+const md = markdownit()
 
 const page = async ({ params }: { params: Promise<{ id: string }>}) => {
    const id = (await params).id
+
    const post = await client.fetch(STARTUP_BY_ID_QUERY, { id })
    if (!post) return notFound()
+   const parsedContent = md.render(post?.pitch || ' ')
 
    return (
       <>
@@ -46,14 +52,22 @@ const page = async ({ params }: { params: Promise<{ id: string }>}) => {
                   <p className='category-tag'>{post.category}</p>
                </div>
                
-               <h3 className='text-30-bold'>Post Details</h3>
+               <h3 className='text-30-bold'>Pitch Details</h3>
+               {parsedContent ? (
+                  <article
+                     className='prose max-w-4xl font-work-sans break-all'
+                     dangerouslySetInnerHTML={{ __html: parsedContent }}
+                  />
+               ) : (
+                  <p className='no-result'>No details provided</p>
+               )}
             </div>
-         </section>
 
-         <section className='section_container'>
-            <div className='space-y-5 mt-10 max-w-4xl mx-auto'>
+            <hr className='divider' />
+
+            <Suspense fallback={<Skeleton className='view-skeleton'/>}>
                
-            </div>
+            </Suspense>
          </section>
       </>
    )
