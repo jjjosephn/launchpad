@@ -20,6 +20,9 @@ const page = async ({ params }: { params: Promise<{ id: string }>}) => {
       client.fetch(PLAYLIST_BY_SLUG_QUERY, { slug: 'top-picks' })
    ])
 
+   if (!post) return notFound();
+
+   const parsedContent = md.render(post?.pitch || "");
 
    return (
       <>
