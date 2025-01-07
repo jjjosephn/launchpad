@@ -7,3 +7,16 @@ Launchpad is an interactive platform designed to connect innovators, entrepreneu
 - Frontend: Next.js, TailwindCSS, TypeScript
 - Backend: Next.js, Sanity
 - Authentication: OAuth (Github)
+
+## Visuals 🌟
+**Potential Home Page**
+![Potential Home Page](assets/home.png "A potential layout for the home page")
+
+**Potential Pitch Details Page**
+![Potential Pitch Details Page](assets/PitchDetails.png "A potential pitch for a product")
+
+**Create Startup Page**
+![Create Startup Page](assets/CreateStartup.png "The create startup page")
+
+**Potential Profile Page**
+![Potential Profile Page](assets/Profile.png "A potential profile page")
